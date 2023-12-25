@@ -181,7 +181,7 @@ $view_tweets = [
                                     <?php endif; ?>
      
                                     <div class="icon-list">
-                                        <div class="like js-like" date-like-id="<?php echo htmlspecialchars($view_tweet['like_id']);?> ">
+                                    <div class="like js-like" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id'] ?? ''); ?>">   
                                             <?php
                                             if (isset($view_tweet['like_id'])) {
                                                 // いいね！している場合、青のハートを表示
@@ -192,7 +192,7 @@ $view_tweets = [
                                             }
                                             ?>
                                         </div>
-                                        <div class="like-count js-like-count"><?php echo htmlspecialchars($view_tweet['like_count']); ?></div>
+                                        <div class="like-count js-like-count"><?php echo htmlspecialchars($view_tweet['like_count']); ?></div>    
                                     </div>
                                 </div>
                             </div>

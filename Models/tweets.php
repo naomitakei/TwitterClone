@@ -11,34 +11,31 @@
  */
 function createTweet(array $data)
 {
-    // DB接続
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    // 接続エラーがある場合->処理停止
+    // 接続チェック
     if ($mysqli->connect_errno) {
         echo 'MySQLの接続に失敗しました。：' . $mysqli->connect_error . "\n";
         exit;
     }
  
-    // 新規登録のSQLクエリを作成
+    // 新規登録のSQLを作成
     $query = 'INSERT INTO tweets (user_id, body, image_name) VALUES (?, ?, ?)';
- 
-    // プリペアドステートメントにクエリを登録
     $statement = $mysqli->prepare($query);
  
-    // プレースホルダにカラム値を紐付け（i=int, s=string）
-    $statement->bind_param('iss', $data['user_id'], $data['body'], $data['image_name']);
+   // 値をセット（i=int, s=string）
+   $statement->bind_param('iss', $data['user_id'], $data['body'], $data['image_name']);
  
-    // クエリを実行
-    $response = $statement->execute();
-    if ($response === false) {
-        echo 'エラーメッセージ：' . $mysqli->error . "\n";
-    }
+   // 処理を実行
+   $response = $statement->execute();
+   if ($response === false) {
+       echo 'エラーメッセージ：' . $mysqli->error . "\n";
+   }
 
-        // DB接続を解放
-    $statement->close();
-    $mysqli->close();
- 
-    return $response;
+   // 接続を閉じる
+   $statement->close();
+   $mysqli->close();
+
+   return $response;
 }
 
 /**
@@ -49,9 +46,8 @@ function createTweet(array $data)
     */
 function findTweets(array $user)
 {
-    // DB接続
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    // 接続エラーがある場合->処理停止
+    // 接続チェック
     if ($mysqli->connect_errno) {
         echo 'MySQLの接続に失敗しました。：' . $mysqli->connect_error . "\n";
         exit;

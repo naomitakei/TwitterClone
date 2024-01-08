@@ -11,20 +11,18 @@ include_once '../util.php';
 // ツイートデータ操作モデルを読み込む
 include_once '../Models/tweets.php';
  
-// ログインチェック
+// ログインしているか
 $user = getUserSession();
 if (!$user) {
     // ログインしていない
     header('Location: ' . HOME_URL . 'Controllers/sign-in.php');
     exit;
 }
- 
-// 表示用の変数
+
+// 画面表示
 $view_user = $user;
 // ツイート一覧
-// TODO: モデルから取得する
 $view_tweets = findTweets($user);
-    
- 
-// 画面表示
 include_once '../Views/home.php';
+   
+ 

@@ -1,3 +1,5 @@
 # OSファイルが自動生成するファイル
 .DS_Store
 Thumbus.db
+
+/twitter_clone_testdata.sql
